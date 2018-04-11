@@ -5,13 +5,20 @@ From Scratch Project Setup:
 // package.json & README
 $ npm init
 $ touch README.md
-$ touch git.ignore // add 'node_modules'
+$ touch .gitignore && echo "node_modules/" >> .gitignore
 $ git init
 $ mkdir src dist
 $ touch src/index.html
 
-// Gulp
+// Gulp - task runner
 $ npm install -g gulp
 $ npm install --save gulp@3.9.0 gulp-connect@2.2.0 gulp-open@1.0.0
 $ touch gulpfile.js // dig into file for configuration
 
+// Browserify - JS bundler
+// Reactify - compiles JSX
+// Vinyl Source Stream - 
+$ npm install --save browserify@11.0.1 reactify@1.1.1 vinyl-source-stream@1.1.0
+
+// Bootstrap & jQuery
+$ npm install --save bootstrap@3.3.5 jquery@2.1.4 gulp-concat@2.6.0
