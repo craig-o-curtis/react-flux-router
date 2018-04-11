@@ -22,3 +22,10 @@ $ npm install --save browserify@11.0.1 reactify@1.1.1 vinyl-source-stream@1.1.0
 
 // Bootstrap & jQuery
 $ npm install --save bootstrap@3.3.5 jquery@2.1.4 gulp-concat@2.6.0
+    // added in gulp and top of main.js
+
+// ES Lint
+$ touch eslint.config.json
+$ npm install --save gulp-eslint@0.15.0
+
+
