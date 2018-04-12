@@ -29151,10 +29151,10 @@ var React = require('react');
 var Home = React.createClass({displayName: "Home",
 	render: function () {
 		return (
-				React.createElement("div", {className: "jumbotron"}, 
-					React.createElement("h1", null, "Pluralsight Admin"), 
-					React.createElement("p", null, "React, React-Router, Flux for ultra-responsive web apps.")
-				)
+			React.createElement("div", {className: "jumbotron"}, 
+				React.createElement("h1", null, "Pluralsight Admin"), 
+				React.createElement("p", null, "React, React-Router, Flux for ultra-responsive web apps.")
+			)
 		);
 	}
 });
