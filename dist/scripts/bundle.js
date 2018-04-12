@@ -29122,19 +29122,19 @@ var React = require('react');
 var About = React.createClass({displayName: "About",
 	render: function () {
 		return (
-			React.createElement("div", null, 
+			React.createElement("div", {className: "container-fluid"}, 
 				React.createElement("h1", null, "About"), 
 				React.createElement("p", null, 
 					"This circa 2015 application uses the following technologies:", 
-          React.createElement("ul", null, 
-						React.createElement("li", null, "React"), 
-						React.createElement("li", null, "React Router"), 
-						React.createElement("li", null, "Flux"), 
-						React.createElement("li", null, "Node"), 
-						React.createElement("li", null, "Gulp"), 
-						React.createElement("li", null, "Browserify"), 
-						React.createElement("li", null, "Bootstrap")
-					)
+          React.createElement("ul", {className: "list-group"}, 
+            React.createElement("li", {className: "list-group-item"}, "React"), 
+            React.createElement("li", {className: "list-group-item"}, "React Router"), 
+            React.createElement("li", {className: "list-group-item"}, "Flux"), 
+            React.createElement("li", {className: "list-group-item"}, "Node"), 
+            React.createElement("li", {className: "list-group-item"}, "Gulp"), 
+            React.createElement("li", {className: "list-group-item"}, "Browserify"), 
+            React.createElement("li", {className: "list-group-item"}, "Bootstrap")
+          )
 				)
 			)
 		);
@@ -29144,6 +29144,42 @@ var About = React.createClass({displayName: "About",
 module.exports = About;
 
 },{"react":157}],159:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+
+var styles = {
+  'navbarBrand': {
+    'maxHeight': '100%',
+    'width': 'auto'
+  }
+};
+
+var Header = React.createClass({displayName: "Header",
+  
+  render: function() {
+    return (
+      React.createElement("nav", {className: "navbar navbar-default"}, 
+        React.createElement("div", {className: "container-fluid"}, 
+        React.createElement("div", {className: "navbar-header"}, 
+          React.createElement("a", {href: "/", className: "navbar-brand"}, 
+            React.createElement("img", {style: styles.navbarBrand, src: "images/pluralsight-logo.png", alt: "brand"})
+          ), 
+          React.createElement("ul", {className: "nav navbar-nav"}, 
+            React.createElement("li", null, React.createElement("a", {href: "/"}, "Home")), 
+            React.createElement("li", null, React.createElement("a", {href: "/#about"}, "About"))
+          )
+          
+        )
+        )
+      )
+    );
+  }
+});
+
+module.exports = Header;
+
+},{"react":157}],160:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -29161,21 +29197,45 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"react":157}],160:[function(require,module,exports){
+},{"react":157}],161:[function(require,module,exports){
 // // use strict method 1 (commented out), remove iife
 // "use strict";
 // // not strict mode
 $ = jQuery = require('jquery');
 
 var React = require('react');
+var Header = require('./components/common/header');
 var Home = require('./components/homePage');
 var About = require('./components/about/aboutPage');
 
 // use strict method 2 - insed an iife
-(function(window) {
+(function(win) {
 "use strict";
 var App = React.createClass({displayName: "App",
-	
+  
+  /** Lifecycle Methods */
+  componentWillMount: function() {
+    console.log('will mount');
+  },
+  componentDidMount: function() {
+    console.log('did mount');
+  },
+  componentWillReceiveProps: function() {
+    console.log('will receive props');
+  },
+  shouldComponentUpdate: function() {
+    console.log('should update');
+    return true; // requires return of bool
+  },
+  componentWillUpdate: function() {
+    console.log('will update');
+  },
+  componentDidUpdate: function() {
+    console.log('did update');
+  },
+  componentWillUnmout: function() {
+    console.log('will unmount');
+  },
 	
 	render: function () {
 		var Child = null;
@@ -29187,6 +29247,7 @@ var App = React.createClass({displayName: "App",
 
 		return (
 			React.createElement("div", null, 
+        React.createElement(Header, null), 
 				React.createElement(Child, null)
 			)
 		);
@@ -29194,17 +29255,17 @@ var App = React.createClass({displayName: "App",
 });
 
 function render() {
-	var route = window.location.hash.substr(1);
+	var route = win.location.hash.substr(1);
 	
 	React.render(React.createElement(App, {route: route}), document.getElementById('app'));
 }
 
 // event listener for URL change
-window .addEventListener('hashchange', render);
+win.addEventListener('hashchange', render);
 render();
 
 })(window);
 
 // React.render(<Home />, document.getElementById('app'));
 
-},{"./components/about/aboutPage":158,"./components/homePage":159,"jquery":1,"react":157}]},{},[160]);
+},{"./components/about/aboutPage":158,"./components/common/header":159,"./components/homePage":160,"jquery":1,"react":157}]},{},[161]);

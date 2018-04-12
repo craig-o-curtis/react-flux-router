@@ -4,14 +4,38 @@
 $ = jQuery = require('jquery');
 
 var React = require('react');
+var Header = require('./components/common/header');
 var Home = require('./components/homePage');
 var About = require('./components/about/aboutPage');
 
 // use strict method 2 - insed an iife
-(function(window) {
+(function(win) {
 "use strict";
 var App = React.createClass({
-	
+  
+  /** Lifecycle Methods */
+  componentWillMount: function() {
+    console.log('will mount');
+  },
+  componentDidMount: function() {
+    console.log('did mount');
+  },
+  componentWillReceiveProps: function() {
+    console.log('will receive props');
+  },
+  shouldComponentUpdate: function() {
+    console.log('should update');
+    return true; // requires return of bool
+  },
+  componentWillUpdate: function() {
+    console.log('will update');
+  },
+  componentDidUpdate: function() {
+    console.log('did update');
+  },
+  componentWillUnmout: function() {
+    console.log('will unmount');
+  },
 	
 	render: function () {
 		var Child = null;
@@ -23,6 +47,7 @@ var App = React.createClass({
 
 		return (
 			<div>
+        <Header />
 				<Child />
 			</div>
 		);
@@ -30,13 +55,13 @@ var App = React.createClass({
 });
 
 function render() {
-	var route = window.location.hash.substr(1);
+	var route = win.location.hash.substr(1);
 	
 	React.render(<App route={route} />, document.getElementById('app'));
 }
 
 // event listener for URL change
-window .addEventListener('hashchange', render);
+win.addEventListener('hashchange', render);
 render();
 
 })(window);
