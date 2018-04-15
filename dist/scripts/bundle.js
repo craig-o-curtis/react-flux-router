@@ -37239,7 +37239,7 @@ var AuthorPage = React.createClass({displayName: "AuthorPage",
 
 module.exports = AuthorPage;
 
-},{"../../mock-api/authorApi":205,"./authorList/authorList":200,"react":197}],202:[function(require,module,exports){
+},{"../../mock-api/authorApi":206,"./authorList/authorList":200,"react":197}],202:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -37282,13 +37282,16 @@ module.exports = Header;
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link; 
 
 var HomePage = React.createClass({displayName: "HomePage",
 	render: function () {
 		return (
 			React.createElement("div", {className: "jumbotron"}, 
 				React.createElement("h1", null, "Pluralsight Admin"), 
-				React.createElement("p", null, "React, React-Router, Flux for ultra-responsive web apps.")
+				React.createElement("p", null, "React, React-Router, Flux for ultra-responsive web apps."), 
+        React.createElement(Link, {to: "about", className: "btn btn-lg btn-primary"}, "Learn more")
 			)
 		);
 	}
@@ -37296,7 +37299,27 @@ var HomePage = React.createClass({displayName: "HomePage",
 
 module.exports = HomePage;
 
-},{"react":197}],204:[function(require,module,exports){
+},{"react":197,"react-router":28}],204:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var Link = require('react-router').Link;
+
+var NotFoundPage = React.createClass({displayName: "NotFoundPage",
+  render: function() {
+    return (
+      React.createElement("div", {className: "alert alert-danger"}, 
+        React.createElement("h1", null, "Page Not Found"), 
+        React.createElement("p", null, "Nothing to see here..."), 
+        React.createElement("p", null, React.createElement(Link, {to: "app", className: "btn btn-sm btn-danger"}, "Back to Home"))
+      )
+    );
+  }
+});
+
+module.exports = NotFoundPage;
+
+},{"react":197,"react-router":28}],205:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -37307,7 +37330,7 @@ Router.run(routes, function(Handler) {
   React.render(React.createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":207,"react":197,"react-router":28}],205:[function(require,module,exports){
+},{"./routes":208,"react":197,"react-router":28}],206:[function(require,module,exports){
 "use strict";
 
 //This file is mocking a web API by hitting hard coded data.
@@ -37359,7 +37382,7 @@ var AuthorApi = {
 
 module.exports = AuthorApi;
 
-},{"./authorData":206,"lodash":2}],206:[function(require,module,exports){
+},{"./authorData":207,"lodash":2}],207:[function(require,module,exports){
 module.exports = {
 	authors: 
 	[
@@ -37381,22 +37404,25 @@ module.exports = {
 	]
 };
 
-},{}],207:[function(require,module,exports){
+},{}],208:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
 var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
+var NotFoundRoute = Router.NotFoundRoute;
+
 
 var routes = (
   React.createElement(Route, {name: "app", path: "/", handler: require('./components/app')}, 
     React.createElement(DefaultRoute, {handler: require('./components/homePage/homePage')}), 
     React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage')}), 
-    React.createElement(Route, {name: "about", path: "about-us", handler: require('./components/about/aboutPage')})
+    React.createElement(Route, {name: "about", path: "about-us", handler: require('./components/about/aboutPage')}), 
+    React.createElement(NotFoundRoute, {handler: require('./components/notFoundPage/notFoundPage')})
   )
 );
 
 module.exports = routes;
 
-},{"./components/about/aboutPage":198,"./components/app":199,"./components/authors/authorPage":201,"./components/homePage/homePage":203,"react":197,"react-router":28}]},{},[204]);
+},{"./components/about/aboutPage":198,"./components/app":199,"./components/authors/authorPage":201,"./components/homePage/homePage":203,"./components/notFoundPage/notFoundPage":204,"react":197,"react-router":28}]},{},[205]);
