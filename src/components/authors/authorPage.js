@@ -4,7 +4,7 @@ var React = require('react');
 var AuthorApi = require('../../mock-api/authorApi');
 var AuthorList = require('./authorList/authorList');
 
-var Authors = React.createClass({
+var AuthorPage = React.createClass({
 
   getInitialState: function() {
     return {
@@ -22,7 +22,7 @@ var Authors = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="">
         <h1>Authors</h1>
         <AuthorList authors={this.state.authors} />
       </div>
@@ -30,4 +30,4 @@ var Authors = React.createClass({
   }
 });
 
-module.exports = Authors;
+module.exports = AuthorPage;
