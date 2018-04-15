@@ -3,6 +3,9 @@ Demo project from Cory House's 2015 React Flux Course
 
 Start the project
 ```bash
+$ mkdir react-flux-router && cd react-flux-router
+$ git clone https://github.com/craig-o-curtis/react-flux-router.git
+$ npm install
 $ gulp
 ```
 // open localhost:9005
