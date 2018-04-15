@@ -1,6 +1,12 @@
 Demo project from Cory House's 2015 React Flux Course
 /* prepare for deprecation! */
 
+Start the project
+```bash
+$ gulp
+```
+// open localhost:9005
+
 From Scratch Project Setup:
 // package.json & README
 ```bash
