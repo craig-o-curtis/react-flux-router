@@ -3,6 +3,21 @@
 var React = require('react');
 
 var About = React.createClass({
+  statics: {
+    // lock down route
+    willTransitionTo: function(transition, params, query, callback) {
+      if ( !confirm('Are you sure you want to go to the About page? ') ) {
+        transition.abort();
+      } else {
+        callback(); // allows transition to occur
+      }
+    },
+    willTransitionFrom: function(transition, component ) {
+      if (!confirm('Are you sure you want to leave this page?')) {
+        transition.abort();
+      }
+    }
+  },
 	render: function () {
 		return (
 			<div className="">

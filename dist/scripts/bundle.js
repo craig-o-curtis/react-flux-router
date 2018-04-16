@@ -37063,6 +37063,21 @@ module.exports = require('./lib/React');
 var React = require('react');
 
 var About = React.createClass({displayName: "About",
+  statics: {
+    // lock down route
+    willTransitionTo: function(transition, params, query, callback) {
+      if ( !confirm('Are you sure you want to go to the About page? ') ) {
+        transition.abort();
+      } else {
+        callback(); // allows transition to occur
+      }
+    },
+    willTransitionFrom: function(transition, component ) {
+      if (!confirm('Are you sure you want to leave this page?')) {
+        transition.abort();
+      }
+    }
+  },
 	render: function () {
 		return (
 			React.createElement("div", {className: ""}, 
@@ -37157,7 +37172,7 @@ var App = React.createClass({displayName: "App",
 			React.createElement("div", null, 
         React.createElement(Header, null), 
         React.createElement("div", {className: "container-fluid"}, 
-				  React.createElement(RouteHandler, null)
+          React.createElement(RouteHandler, null)
         )
 			)
 		);
@@ -37257,7 +37272,7 @@ var Header = React.createClass({displayName: "Header",
   
   render: function() {
     return (
-      React.createElement("nav", {className: "navbar navbar-default"}, 
+      React.createElement("nav", {className: "navbar navbar-inverse"}, 
         React.createElement("div", {className: "container-fluid"}, 
         React.createElement("div", {className: "navbar-header"}, 
           React.createElement(Link, {to: "app", className: "navbar-brand"}, 
@@ -37266,7 +37281,8 @@ var Header = React.createClass({displayName: "Header",
           React.createElement("ul", {className: "nav navbar-nav"}, 
             React.createElement("li", null, React.createElement(Link, {to: "app"}, "Home")), 
             React.createElement("li", null, React.createElement(Link, {to: "authors"}, "Authors")), 
-            React.createElement("li", null, React.createElement(Link, {to: "about"}, "About"))
+            React.createElement("li", null, React.createElement(Link, {to: "about"}, "About")), 
+            React.createElement("li", null, React.createElement(Link, {to: "about-deprecated"}, "About Us Redirect"))
           )
           
         )
@@ -37412,14 +37428,20 @@ var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 var NotFoundRoute = Router.NotFoundRoute;
-
+var Redirect = Router.Redirect;
 
 var routes = (
   React.createElement(Route, {name: "app", path: "/", handler: require('./components/app')}, 
     React.createElement(DefaultRoute, {handler: require('./components/homePage/homePage')}), 
     React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage')}), 
     React.createElement(Route, {name: "about", path: "about-us", handler: require('./components/about/aboutPage')}), 
-    React.createElement(NotFoundRoute, {handler: require('./components/notFoundPage/notFoundPage')})
+    React.createElement(Redirect, {from: "about-deprecated", to: "about"}), " ", /* redirect must be before redirect route def */
+    React.createElement(Route, {name: "about-deprecated", path: "about-deprecated", handler: require('./components/homePage/homePage')}), 
+    React.createElement(NotFoundRoute, {handler: require('./components/notFoundPage/notFoundPage')}), 
+    React.createElement(Redirect, {from: "a*rs", to: "authors"}), 
+    React.createElement(Redirect, {from: "writers", to: "authors"}), 
+    React.createElement(Redirect, {from: "about*", to: "about"})
+    
   )
 );
 

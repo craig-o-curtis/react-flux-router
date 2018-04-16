@@ -15,7 +15,7 @@ var Header = React.createClass({
   
   render: function() {
     return (
-      <nav className="navbar navbar-default">
+      <nav className="navbar navbar-inverse">
         <div className="container-fluid">
         <div className="navbar-header">
           <Link to="app" className="navbar-brand">
@@ -25,6 +25,7 @@ var Header = React.createClass({
             <li><Link to="app">Home</Link></li>
             <li><Link to="authors">Authors</Link></li>
             <li><Link to="about">About</Link></li>
+            <li><Link to="about-deprecated">About Us Redirect</Link></li>
           </ul>
           
         </div>
