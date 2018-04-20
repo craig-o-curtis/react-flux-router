@@ -5,6 +5,8 @@ var Router = require('react-router');
 var AuthorForm = require('./authorForm/authorForm');
 var AuthorApi = require('../../../mock-api/authorApi');
 
+var Toastr = require('toastr');
+
 var AddAuthorPage = React.createClass({
   // react-router mixin
   mixins: [
@@ -33,6 +35,9 @@ var AddAuthorPage = React.createClass({
     event.preventDefault(); // stop form from submitting
     // like using eternal service - just import above and use
     AuthorApi.saveAuthor(this.state.author);
+
+    // nice easy toastrs!
+    Toastr.success('Author saved'); 
 
     // Use react-router mixin to transition to diff route
       // like $state.go

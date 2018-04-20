@@ -51,4 +51,11 @@ $ npm install --save gulp-eslint@0.15.0
 ```bash
 $ npm install --save react@0.13.3 react-router@0.13.3 flux@2.0.3
 ```
+// Other Libs:
+```bash
+$ npm install --save toastr@2.1.0
+```
+    // add toastr css in gulpfile in config.paths.css array
+    // just require lib in file where need it
+
 
