@@ -4,6 +4,13 @@ var React = require('react');
 var TextInput = require('../../../common/textInput');
 
 var AuthorForm = React.createClass({
+  propTypes: {
+    author: React.PropTypes.object.isRequired,
+    handleChange: React.PropTypes.func.isRequired,
+    errors: React.PropTypes.object,
+    handleSave: React.PropTypes.func.isRequired
+  },
+
   render: function() {
 
     return (
@@ -18,7 +25,7 @@ var AuthorForm = React.createClass({
             placeholder="Enter First Name"
             onChange={this.props.handleChange}
             errorClass="alert alert-danger"
-            error={null}
+            error={this.props.errors.firstName}
             value={this.props.author.firstName}
           />
 
@@ -30,7 +37,7 @@ var AuthorForm = React.createClass({
             placeholder="Enter Last Name"
             onChange={this.props.handleChange}
             errorClass="alert alert-warning"
-            error={false}
+            error={this.props.errors.lastName}
             value={this.props.author.lastName}
           />
           <br />

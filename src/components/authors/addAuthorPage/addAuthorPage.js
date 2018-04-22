@@ -19,7 +19,8 @@ var AddAuthorPage = React.createClass({
         id: '',
         firstName: '',
         lastName: ''
-      }
+      },
+      errors: {}
     };
   },
   setAuthorState: function(e) {
@@ -31,8 +32,31 @@ var AddAuthorPage = React.createClass({
     return this.setState({author: this.state.author});
   },
 
+  authorFormIsValid: function() {
+    var formIsValid = true;
+    this.state.errors = {}; // clear any previous errors
+
+    if (this.state.author.firstName.length < 3) {
+      this.state.errors.firstName = 'First name must be at least 3 characters.';
+      formIsValid = false;
+    }
+    if (this.state.author.lastName.length < 3) {
+      this.state.errors.lastName = 'Last name must be at least 3 characters.';
+      formIsValid = false;
+    }
+
+    this.setState({errors: this.state.errors});
+    
+    return formIsValid;
+  },
+
   saveAuthor: function(event) {
     event.preventDefault(); // stop form from submitting
+
+    if (!this.authorFormIsValid()) {
+      return;
+    }
+
     // like using eternal service - just import above and use
     AuthorApi.saveAuthor(this.state.author);
 
@@ -50,6 +74,7 @@ var AddAuthorPage = React.createClass({
         <AuthorForm 
           author={this.state.author} 
           handleChange={this.setAuthorState}
+          errors={this.state.errors}
           handleSave={this.saveAuthor}
         />
       </div>
