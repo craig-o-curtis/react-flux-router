@@ -7,11 +7,22 @@ var AuthorApi = require('../../../mock-api/authorApi');
 
 var Toastr = require('toastr');
 
-var AddAuthorPage = React.createClass({
+var ManageAuthorPage = React.createClass({
   // react-router mixin
   mixins: [
     Router.Navigation
   ],
+
+  statics: {
+    willTransitionTo: function(transition, params, query, go) {
+      go(); // allows transitions to this page
+    },
+    willTransitionFrom: function(transition, component) {
+      if (component.state.dirty && !confirm('Leave without saving?')) {
+        transition.abort();
+      }
+    }
+  },
 
   getInitialState: function() {
     return {
@@ -20,14 +31,29 @@ var AddAuthorPage = React.createClass({
         firstName: '',
         lastName: ''
       },
-      errors: {}
+      errors: {},
+      dirty: false
     };
   },
+  // place to hydrate a form
+    // need to set state before render, so don't use componentDidMount
+  componentWillMount: function() {
+    // react router passes params down to props
+    var authorId = this.props.params.id; // from path "author/:id"
+
+    if (authorId) {
+      this.setState({author: AuthorApi.getAuthorById(authorId)});
+    }
+  },
+
   setAuthorState: function(e) {
-    var field = event.target.name;
-    var value = event.target.value;
+    var field = e.target.name;
+    var value = e.target.value;
     // get current state
     this.state.author[field] = value;
+    // manually set to dirty
+    // this.state.dirty = true; /// works ...but shouldn't...
+    this.setState({dirty: true});
     // set state
     return this.setState({author: this.state.author});
   },
@@ -59,6 +85,7 @@ var AddAuthorPage = React.createClass({
 
     // like using eternal service - just import above and use
     AuthorApi.saveAuthor(this.state.author);
+    this.setState({dirty: false});
 
     // nice easy toastrs!
     Toastr.success('Author saved'); 
@@ -82,4 +109,4 @@ var AddAuthorPage = React.createClass({
   }
 });
 
-module.exports = AddAuthorPage;
+module.exports = ManageAuthorPage;

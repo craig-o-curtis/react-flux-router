@@ -10,7 +10,8 @@ var Redirect = Router.Redirect;
 var routes = (
   <Route name="app" path="/" handler={require('./components/app')} >
     <DefaultRoute handler={require('./components/homePage/homePage')} />
-    <Route name="addAuthor" path="author" handler={require('./components/authors/addAuthorPage/addAuthorPage')} />
+    <Route name="addAuthor" path="author" handler={require('./components/authors/manageAuthorPage/manageAuthorPage')} />
+    <Route name="editAuthor" path="author/:id" handler={require('./components/authors/manageAuthorPage/manageAuthorPage')} />
     <Route name="authors" handler={require('./components/authors/authorPage')} />
     <Route name="about" path="about-us" handler={require('./components/about/aboutPage')} />
     {/* redirect must be before redirect route def */}

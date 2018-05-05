@@ -12,7 +12,7 @@ var About = React.createClass({
         callback(); // allows transition to occur
       }
     },
-    willTransitionFrom: function(transition, component ) {
+    willTransitionFrom: function(transition, component) {
       if (!confirm('Are you sure you want to leave this page?')) {
         transition.abort();
       }
