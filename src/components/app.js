@@ -13,7 +13,7 @@ var App = React.createClass({
    *    Set initial state
    */
   componentWillMount: function() {
-    console.log('will mount');
+    // console.log('will mount');
   },
   /** Uses:
    *    Access the DOM
@@ -22,7 +22,7 @@ var App = React.createClass({
    *    AJAX requests
    */
   componentDidMount: function() {
-    console.log('did mount');
+    // console.log('did mount');
   },
   /** Uses:
    *    Not on initial render
@@ -30,14 +30,14 @@ var App = React.createClass({
    *    Place to set state before next render
    */
   componentWillReceiveProps: function() {
-    console.log('will receive props');
+    // console.log('will receive props');
   },
   /** Uses:
    *    Before render for new state or props
    *    return false for unnecessary re-renders
    */
   shouldComponentUpdate: function() {
-    console.log('should update');
+    // console.log('should update');
     return true; // requires return of bool
   },
   /** Uses:
@@ -47,20 +47,20 @@ var App = React.createClass({
    *    ** Cannot call setState here
    */
   componentWillUpdate: function() {
-    console.log('will update');
+    // console.log('will update');
   },
   /** Uses:
    *    After updates are flushed to the DOM
    *    Work with DOM after update
    */
   componentDidUpdate: function() {
-    console.log('did update');
+    // console.log('did update');
   },
   /** Uses:
    *    Cleanup
    */    
   componentWillUnmout: function() {
-    console.log('will unmount');
+    // console.log('will unmount');
   },
 	
 	render: function () {

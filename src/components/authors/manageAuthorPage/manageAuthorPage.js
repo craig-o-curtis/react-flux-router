@@ -3,7 +3,9 @@
 var React = require('react');
 var Router = require('react-router');
 var AuthorForm = require('./authorForm/authorForm');
-var AuthorApi = require('../../../mock-api/authorApi');
+// var AuthorApi = require('../../../mock-api/authorApi'); without flux
+var AuthorActions = require('../../../actions/authorActions'); // with flux
+var AuthorStore = require('../../../stores/authorStore'); // with flux
 
 var Toastr = require('toastr');
 
@@ -42,7 +44,8 @@ var ManageAuthorPage = React.createClass({
     var authorId = this.props.params.id; // from path "author/:id"
 
     if (authorId) {
-      this.setState({author: AuthorApi.getAuthorById(authorId)});
+      // this.setState({author: AuthorApi.getAuthorById(authorId)}); // without flux
+      this.setState({author: AuthorStore.getAuthorById(authorId)}); // with flux
     }
   },
 
@@ -83,8 +86,15 @@ var ManageAuthorPage = React.createClass({
       return;
     }
 
-    // like using eternal service - just import above and use
-    AuthorApi.saveAuthor(this.state.author);
+    // handle updating vs creating
+    if (this.state.author.id) {
+      AuthorActions.updateAuthor(this.state.author);
+    } else {
+      // like using eternal service - just import above and use
+      // AuthorApi.saveAuthor(this.state.author); // without flux
+      AuthorActions.createAuthor(this.state.author); // with flux
+    }
+ 
     this.setState({dirty: false});
 
     // nice easy toastrs!

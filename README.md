@@ -47,9 +47,9 @@ $ touch eslint.config.json
 $ npm install --save gulp-eslint@0.15.0
 ```
 
-// React, React Router, Flux
+// React, React Router, Flux, Object-Assign
 ```bash
-$ npm install --save react@0.13.3 react-router@0.13.3 flux@2.0.3
+$ npm install --save react@0.13.3 react-router@0.13.3 flux@2.0.3 object-assign
 ```
 // Other Libs:
 ```bash
